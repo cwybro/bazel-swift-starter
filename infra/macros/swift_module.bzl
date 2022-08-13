@@ -51,7 +51,7 @@ def swift_module(
           srcs = [":%s" % SOURCE_FILES_NAME],
           outs = ["%sGeneratedMocks.swift" % name],
           tools = ["@com_github_uber_mockolo//:mockolo"],
-          cmd = "$(location @com_github_uber_mockolo//:mockolo) --sourcefiles $(SRCS) --destination $@ --testable-imports %s > /dev/null" % name,
+          cmd = "$(location @com_github_uber_mockolo//:mockolo) --sourcefiles $(SRCS) --destination $@ --testable-imports %s --enable-args-history > /dev/null" % name,
       )
       swift_library(
           name = "%sGeneratedMocks" % name,
