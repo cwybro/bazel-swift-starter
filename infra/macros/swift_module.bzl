@@ -1,5 +1,4 @@
-load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@build_bazel_rules_apple//apple:macos.bzl", "macos_unit_test")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_test")
 load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:xcodeproj.bzl", "xcodeproj")
 
 def swift_module(
@@ -19,7 +18,7 @@ def swift_module(
   # SOURCE MODULE
   # =================
   project_targets = []
-  SOURCE_FILES_NAME = "%s_Source" % name
+  SOURCE_FILES_NAME = "%s_SourceFiles" % name
   native.filegroup(
       name = SOURCE_FILES_NAME,
       srcs = srcs
@@ -65,7 +64,7 @@ def swift_module(
   # TEST MODULE
   # =================
   if test_srcs:
-      TEST_FILES_NAME = "%s_Test" % name
+      TEST_FILES_NAME = "%s_TestFiles" % name
       native.filegroup(
           name = TEST_FILES_NAME,
           srcs = test_srcs
@@ -73,21 +72,13 @@ def swift_module(
       test_library_deps = [":%s" % name] + test_deps
       if mockgen_enabled:
           test_library_deps.append(":%sGeneratedMocks" % name)
-      swift_library(
-          name = "%sTests" % name,
-          module_name = "%sTests" % name,
+      swift_test(
+          name = "%s_UnitTests" % name,
           srcs = [":%s" % TEST_FILES_NAME],
+          data = test_data,
           deps = test_library_deps,
           visibility = visibility,
       )
-      macos_unit_test(
-          name = "%s_UnitTests" % name,
-          data = test_data,
-          minimum_os_version = test_minimum_os_version,
-          deps = [":%sTests" % name],
-          visibility = visibility,
-      )
-      project_targets.append(":%sTests" % name)
       project_targets.append(":%s_UnitTests" % name)
 
   # =================

@@ -8,8 +8,8 @@ This repository template is for new Swift projects that want to use [Bazel](http
 
 1. Select the `Use this template` option and create your new repository based on this template.
 2. Update [`WORKSPACE`](WORKSPACE) for your needs
-3. Update [`.bazelversion`](.bazelversion) with the version of Bazel you wish to use (if you're using [bazelisk](https://github.com/bazelbuild/bazelisk))
-4. Update [`swift_module`](infra/macros/swift_module.bzl) definition for your needs
+3. [Optional] Update [`.bazelversion`](.bazelversion) with the version of Bazel you wish to use (if you're using [bazelisk](https://github.com/bazelbuild/bazelisk))
+4. [Optional] Update [`swift_module`](infra/macros/swift_module.bzl) definition for your needs
 
 ## Setup
 
