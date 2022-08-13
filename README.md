@@ -40,7 +40,7 @@ swift_module(
 ### Open Xcode Project
 `xcodeproj` targets are created for all `swift_module` by default. These projects can be generated via:
 ```bash
-bazelisk run //src:ExampleLibrary_Project
+bazelisk run //:ExampleLibrary_Project
 ```
 
 **Note:** Automatic project creation can be disabled by adding `project_enabled = False` to the `swift_module` definition.
