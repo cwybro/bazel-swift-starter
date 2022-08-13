@@ -22,7 +22,7 @@ make setup
 
 ### New Targets
 To create new `swift_module` targets, add a `BUILD` file similar to the following (substituting your own values):
-```
+```starlark
 load("//infra/macros:swift_module.bzl", "swift_module")
 
 swift_module(
@@ -39,7 +39,7 @@ swift_module(
 
 ### Open Xcode Project
 `xcodeproj` targets are created for all `swift_module` by default. These projects can be generated via:
-```
+```bash
 bazelisk run //src:ExampleLibrary_Project
 ```
 
